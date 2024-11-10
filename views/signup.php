@@ -7,6 +7,9 @@
     <title>Txxiter: Sign Up</title>
 </head>
 <body>
-   <p>Sign Up Here</p> 
+   <p>Sign Up Here</p>
+   <p>
+        <a href="/~teterheo/hello">link</a>
+   </p> 
 </body>
 </html>
