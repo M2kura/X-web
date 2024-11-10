@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="./styles/login.css">
     <title id="title">Twixter: Log In</title>
 </head>
 <body>
     <div id="form-login">
-        <h1 class>Log In Here</h1>
+        <h1>Log In Here</h1>
         <form>
             <label for="login">Login: </label>
             <input name="login" id="name" type="text">
             <label for="password">Password: </label>
             <input name="password" id="password" type="password">
             <button type="submit" id="submit-login">Log In</button>
-            <a id="link-to-signup">Don't have an account?</a>
+            <a href="" id="link-to-signup">Don't have an account?</a>
         </form>
     </div>
     <div id="form-signup" class="hidden">
-        <h1 class>Sign Up Here</h1>
+        <h1>Sign Up Here</h1>
         <form>
             <label for="login">Login: </label>
             <input name="login" id="name" type="text">
@@ -28,9 +28,9 @@
             <label for="password-again">Confirm password: </label>
             <input name="password-again" id="password-again" type="password-again">
             <button type="submit" id="submit-signup">Log In</button>
-            <a id="link-to-login">Already have an account?</a>
+            <a href="" id="link-to-login">Already have an account?</a>
         </form>
     </div>
-    <script src="../scripts/login.js"></script>
+    <script src="./scripts/login.js"></script>
 </body>
 </html>

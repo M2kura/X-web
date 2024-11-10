@@ -9,5 +9,12 @@ function redirect() {
     signupForm.classList.toggle("hidden")
 }
 
-loginLink.addEventListener('click', redirect());
-signupLink.addEventListener('click', redirect());
+loginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    redirect();
+});
+
+signupLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    redirect();
+});
