@@ -6,7 +6,7 @@ class Router {
     ];
     
     public function transfer($uri) {
-        echo $uri;
+        echo $uri; // for debbug
         if (array_key_exists($uri, $this->routes)) {
             require $this->routes[$uri];  
         } else {

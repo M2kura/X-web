@@ -7,6 +7,11 @@ const signupLink = document.getElementById("link-to-signup");
 function redirect() {
     loginForm.classList.toggle("hidden")
     signupForm.classList.toggle("hidden")
+    if (title.innerHTML == "Twixter: Log In") {
+        title.innerHTML = "Twixter: Sign Up";
+    } else {
+        title.innerHTML = "Twixter: Log In";
+    }
 }
 
 loginLink.addEventListener('click', (e) => {

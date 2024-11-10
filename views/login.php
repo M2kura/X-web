@@ -27,7 +27,7 @@
             <input name="password" id="password" type="password">
             <label for="password-again">Confirm password: </label>
             <input name="password-again" id="password-again" type="password-again">
-            <button type="submit" id="submit-signup">Log In</button>
+            <button type="submit" id="submit-signup">Sign Up</button>
             <a href="" id="link-to-login">Already have an account?</a>
         </form>
     </div>
