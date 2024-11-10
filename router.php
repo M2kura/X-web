@@ -2,8 +2,7 @@
 
 class Router {
     private $routes = [
-        "/~teterheo/" => __DIR__ . "/views/signup.php",
-        "/~teterheo/hello" => __DIR__ . "/views/hello.php"
+        "/~teterheo/" => __DIR__ . "/views/login.php",
     ];
     
     public function transfer($uri) {
