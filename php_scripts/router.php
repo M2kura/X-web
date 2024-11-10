@@ -2,7 +2,7 @@
 
 class Router {
     private $routes = [
-        "/~teterheo/" => __DIR__ . "/views/login.php",
+        "/~teterheo/" => __DIR__ . "/../views/login.php",
     ];
     
     public function transfer($uri) {
@@ -11,7 +11,7 @@ class Router {
             require $this->routes[$uri];  
         } else {
             http_response_code(404);
-            require __DIR__ . "/views/404.php";
+            require __DIR__ . "../views/404.php";
         } 
     }
 }
