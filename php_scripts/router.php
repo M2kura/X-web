@@ -3,15 +3,16 @@
 class Router {
     private $routes = [
         "/~teterheo/" => __DIR__ . "/../views/login.php",
+        "/~teterheo/home" => __DIR__ . "/../views/home_page.php",
     ];
     
     public function transfer($uri) {
-        echo $uri; // for debbug
+        // echo $uri; // for debbug
         if (array_key_exists($uri, $this->routes)) {
             require $this->routes[$uri];  
         } else {
             http_response_code(404);
-            require __DIR__ . "../views/404.php";
+            require __DIR__ . "/../views/404.php";
         } 
     }
 }

@@ -9,7 +9,7 @@
 <body>
     <div id="form-login">
         <h1>Log In Here</h1>
-        <form>
+        <form action="./php_scripts/login_script.php" method="POST">
             <label for="login">Login: </label>
             <input name="login" id="name" type="text">
             <label for="password">Password: </label>
@@ -20,7 +20,7 @@
     </div>
     <div id="form-signup" class="hidden">
         <h1>Sign Up Here</h1>
-        <form action="signup_script.php" method="POST">
+        <form action="./php_scripts/signup_script.php" method="POST">
             <label for="login">Login: </label>
             <input name="login" id="name" type="text">
             <label for="password">Password: </label>
