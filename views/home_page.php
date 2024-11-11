@@ -1,3 +1,5 @@
+<?php require "./php_scripts/check_session.php" ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,5 +9,8 @@
 </head>
 <body>
     <p>Home Page</p>
+    <form action="./php_scripts/logout_script.php" method="POST">
+        <button type="submit">Log out</button>
+    </form>
 </body>
 </html>
