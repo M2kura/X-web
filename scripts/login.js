@@ -3,6 +3,8 @@ const loginForm = document.getElementById("form-login");
 const signupForm = document.getElementById("form-signup");
 const loginLink = document.getElementById("link-to-login");
 const signupLink = document.getElementById("link-to-signup");
+const fileClearButton = document.getElementById("clear-file");
+const fileInput = document.getElementById("profile-picture");
 
 function redirect() {
     loginForm.classList.toggle("hidden")
@@ -22,4 +24,14 @@ loginLink.addEventListener('click', (e) => {
 signupLink.addEventListener('click', (e) => {
     e.preventDefault();
     redirect();
+});
+
+fileInput.addEventListener('change', () => {
+    fileClearButton.classList.toggle("hidden");
+})
+
+fileClearButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    fileInput.value = "";
+    fileClearButton.classList.add("hidden");
 });
