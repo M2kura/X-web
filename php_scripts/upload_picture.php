@@ -5,7 +5,6 @@ function uploadPicture($file, $path) {
     $targetDir = $path . "." . $fileExtension;
 
     if (move_uploaded_file($file["tmp_name"], $targetDir)) {
-        chmod($targetDir, 0777);
         return ["success" => true, "filePath" => $targetDir];
     } else {
         return ["success" => false, "message" => "There's an error with uploading your file."];

@@ -1,3 +1,10 @@
+<?php
+
+require "php_scripts/check_session.php";
+isSessionUp();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
