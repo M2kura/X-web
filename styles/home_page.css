@@ -1,0 +1,36 @@
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+.logo-crop {
+    width: 200px;
+    height: 80px;
+    overflow: hidden;
+    position: relative;
+}
+
+.logo-img {
+    width: 500%;
+    height: auto;
+    position: absolute;
+    --logo-img-width: 500%; 
+    top: calc(var(--logo-img-width) * -0.59);
+    left: calc(var(--logo-img-width) * -0.4);
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 20px;
+    box-sizing: border-box;
+    border-right: 1px solid white;
+}
