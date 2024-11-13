@@ -10,7 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $passwordAgain = $_POST['password-again'];
     $profilePicture = $_FILES['profile-picture'];
-    
+    $role = "user";    
+
     if ($password !== $passwordAgain) {
         die("Passwords don't match.");
     }
@@ -26,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $profilePicture = null;
     }
 
-    $query = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-    $query->bind_param("ss", $login, $hashedPassword);
+    $query = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
+    $query->bind_param("sss", $login, $hashedPassword, $role);
 
     if ($query->execute()) {
         mkdir("../media/users/".$login, 0777, true);
