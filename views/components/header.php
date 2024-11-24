@@ -1,6 +1,6 @@
 <header id="header">
     <div class="logo-div">
-            <img src="./media/web/logo_white.svg" alt="Logo" class="logo-img">
+            <a href="/~teterheo/home"><img src="./media/web/logo_white.svg" alt="Logo" class="logo-img"></a>
     </div>
     <div class="profile-link">
         <a href="/~teterheo/profile">Profile</a>

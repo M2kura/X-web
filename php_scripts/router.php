@@ -4,6 +4,7 @@ class Router {
     private $routes = [
         "/~teterheo/" => __DIR__ . "/../views/login.php",
         "/~teterheo/home" => __DIR__ . "/../views/home_page.php",
+        "/~teterheo/profile" => __DIR__ . "/../views/profile_page.php"
     ];
     
     public function transfer($uri) {

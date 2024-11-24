@@ -16,8 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query->fetch();
         
         if (password_verify($password, $hashedPassword)) {
+            $role = $conn->query("SELECT role FROM users WHERE username = '$login'")->fetch_assoc();
+
             session_start();
             $_SESSION['login'] = $login;
+            $_SESSION['role'] = $role['role'];
 
             $query->close();
             $conn->close();
