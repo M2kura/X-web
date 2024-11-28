@@ -10,12 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $passwordAgain = $_POST['password-again'];
     $profilePicture = $_FILES['profile-picture'];
-    $role = "user";    
+    $role = "user";
 
     if ($password !== $passwordAgain) {
         die("Passwords don't match.");
     }
-    
+
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     if (isset($profilePicture) && $profilePicture['error'] != UPLOAD_ERR_NO_FILE) {
@@ -33,10 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($query->execute()) {
         mkdir("../media/users/".$login, 0777, true);
         if ($profilePicture != null) {
-            $uploadPicture = uploadPicture($profilePicture, "../media/users/".$login."/profile_picture");
+            $uploadPicture = uploadPicture($profilePicture, "../media/users/".$login."/profile_picture.");
             if (!$uploadPicture['success']) {
                 die($uploadPicture['message']);
-            }
+           }
         }
 
         $_SESSION['login'] = $login;

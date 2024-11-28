@@ -17,6 +17,13 @@ isSessionDown();
     <main class="content">
         <h1>Profile Page</h1>
         <h2>Hello, <?php echo($_SESSION['login']) ?></h2>
+        <?php
+        $path = "media/users/".$_SESSION['login']."/profile_picture.png";
+        if (file_exists($path))
+            echo '<img src="'.$path.'" alt="Avatar">';
+        else
+            echo '<img src="media/web/default_avatar.png" alt="Avatar">';
+        ?>
     </main>
     <aside class="sidebar"></aside>
 </body>
