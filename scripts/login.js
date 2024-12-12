@@ -1,14 +1,13 @@
 const title = document.getElementById("title");
-const loginForm = document.getElementById("form-login");
-const signupForm = document.getElementById("form-signup");
-const loginLink = document.getElementById("link-to-login");
-const signupLink = document.getElementById("link-to-signup");
-const fileClearButton = document.getElementById("clear-file");
-const fileInput = document.getElementById("profile-picture");
+const loginFormDiv = document.getElementById("form-login");
+const loginForm = document.getElementById("login-form");
+const signupFormDiv = document.getElementById("form-signup");
+const redirectLinks = document.querySelectorAll(".redirect");
+const formInputs = document.querySelectorAll(".form-input");
 
 function redirect() {
-    loginForm.classList.toggle("hidden")
-    signupForm.classList.toggle("hidden")
+    loginFormDiv.classList.toggle("hidden")
+    signupFormDiv.classList.toggle("hidden")
     if (title.innerHTML == "Twixter: Log In") {
         title.innerHTML = "Twixter: Sign Up";
     } else {
@@ -16,22 +15,24 @@ function redirect() {
     }
 }
 
-loginLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    redirect();
+redirectLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        redirect();
+    });
 });
 
-signupLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    redirect();
+
+loginForm.addEventListener('sumbit', (e) => {
+    preventDefault(e);
+
 });
 
-fileInput.addEventListener('change', () => {
-    fileClearButton.classList.toggle("hidden");
-})
-
-fileClearButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    fileInput.value = "";
-    fileClearButton.classList.add("hidden");
+formInputs.forEach((input) => {
+    input.addEventListener('focus', () => {
+        const formWarnings = document.querySelectorAll(".warning");
+        formWarnings.forEach((war) => {
+            war.remove();
+        });
+    });
 });
