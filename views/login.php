@@ -16,7 +16,7 @@ isSessionUp();
 <body>
     <div id="form-login">
         <h1>Log In Here</h1>
-        <form id="login-form">
+        <form id="login-form" action="./php_scripts/login_script.php" method="POST">
             <label for="login">Login: </label>
             <input name="login" id="login-login" type="text" class="form-input">
             <label for="password">Password: </label>
@@ -27,7 +27,7 @@ isSessionUp();
     </div>
     <div id="form-signup" class="hidden">
         <h1>Sign Up Here</h1>
-        <form id="signup-form">
+        <form id="signup-form" action="./php_scripts/signup_script.php" method="POST" enctype="multipart/form-data">
             <label for="login">*Login: </label>
             <input name="login" id="signup-login" type="text" class="form-input">
             <label for="password">*Password: </label>
@@ -35,14 +35,13 @@ isSessionUp();
             <label for="password-again">*Confirm password: </label>
             <input name="password-again" id="signup-password2" type="password" class="form-input">
             <label for="profile-picture">Profile picture: </label>
-            <input name="profile-picture" id="profile-picture" type="file">
+            <input name="profile-picture" id="profile-picture" type="file" class="form-input">
             <button id="clear-file" class="hidden">Clear file</button>
             <button type="submit" id="submit-signup">Sign Up</button>
             <p class="note">Required fields are marked with *</p>
             <a href="" class="redirect">Already have an account?</a>
         </form>
     </div>
-    <script src="./scripts/login.js"></script>
-    <script src="./scripts/signup.js"></script>
+    <script src="./scripts/login_signup.js"></script>
 </body>
 </html>
