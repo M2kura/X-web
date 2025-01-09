@@ -2,20 +2,12 @@
     <div class="logo-div">
             <a href="/~teterheo/home"><img src="./media/web/logo_white.svg" alt="Logo" class="logo-img"></a>
     </div>
-    <div class="profile-link">
-        <a href="/~teterheo/profile">Profile</a>
-    </div>
-    <div class="create-post">
-        <a href="">Create Post</a>
-    </div>
+    <a href="/~teterheo/" class="header-link">Home Page</a>
+    <a href="/~teterheo/profile" class="header-link">Profile</a>
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-        <div class="admin-section">
             <a href="admin_dashboard.php">Admin Dashboard</a>
-        </div>
     <?php endif; ?>
-    <div>
-        <form action="./php_scripts/logout_script.php" method="POST">
-            <button type="submit">Log out</button>
-        </form>
-    </div>
+    <form action="./php_scripts/logout_script.php" method="POST" class="header-link">
+        <button type="submit">Log out</button>
+    </form>
 </header>

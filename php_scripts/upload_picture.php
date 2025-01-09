@@ -21,7 +21,7 @@ function checkPicture($file) {
         return ["success" => false, "message" => "The file cannot be more then 5MB"];
     }
 
-    if ($fileExtension != "jpg" && $fileExtension != "png") {
+    if ($fileExtension != "jpg" && $fileExtension != "png" && $fileExtension != "jpeg") {
         return ["success" => false, "message" => "Allowed formats are: png, jpg"];
     } 
     
