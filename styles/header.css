@@ -1,11 +1,9 @@
 .logo-div {
-    width: 400px;
-    height: 160px;
+    width: 100%;
 }
 
 .logo-img {
     width: 100%;
-    height: 100%;
 }
 
 .header-link {

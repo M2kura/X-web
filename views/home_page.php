@@ -33,14 +33,12 @@ isSessionDown();
                 else
                     echo '<img src="media/web/default_avatar.png" alt="Avatar" class="write-pic">';
                 ?>
-                <button class="write-submit">Post</button>
+                <button class="write-submit" id="send-post">Post</button>
             </div>
-            <form class="write-post">
-                <div class="cloud">
-                    <div class="spike"></div>
-                    <textarea id="write-textarea" class="write-post-text"></textarea>
-                </div>
-            </form>
+            <div class="cloud">
+                <div class="spike"></div>
+                <textarea id="write-textarea" class="write-post-text"></textarea>
+            </div>
         </div>
     </main>
     <aside class="sidebar"></aside>

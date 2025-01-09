@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $_SESSION['login'] = $login;
+        $_SESSION['role'] = $role;
 
         $query->close();
         $conn->close();

@@ -57,11 +57,6 @@ body, html {
     height: 60px;
 }
 
-.write-post {
-    width: 100%;
-    padding-left: 10px;
-}
-
 .write-submit {
     margin-top: 10px;
     font-size: 18px;
@@ -71,6 +66,8 @@ body, html {
 .cloud {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    padding-left: 10px;
 }
 
 .write-post-text {
