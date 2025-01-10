@@ -17,9 +17,9 @@ isSessionUp();
     <div id="form-login">
         <h1>Log In Here</h1>
         <form id="login-form" action="./php_scripts/login_script.php" method="POST">
-            <label for="login">Login: </label>
+            <label for="login-login">Login: </label>
             <input name="login" id="login-login" type="text" class="form-input">
-            <label for="password">Password: </label>
+            <label for="login-password">Password: </label>
             <input name="password" id="login-password" type="password" class="form-input">
             <button type="submit" id="submit-login">Log In</button>
             <a href="" class="redirect">Don't have an account?</a>
@@ -28,11 +28,11 @@ isSessionUp();
     <div id="form-signup" class="hidden">
         <h1>Sign Up Here</h1>
         <form id="signup-form" action="./php_scripts/signup_script.php" method="POST" enctype="multipart/form-data">
-            <label for="login">*Login: </label>
+            <label for="signup-login">*Login: </label>
             <input name="login" id="signup-login" type="text" class="form-input">
-            <label for="password">*Password: </label>
+            <label for="signup-password">*Password: </label>
             <input name="password" id="signup-password" type="password" class="form-input">
-            <label for="password-again">*Confirm password: </label>
+            <label for="signup-password2">*Confirm password: </label>
             <input name="password-again" id="signup-password2" type="password" class="form-input">
             <label for="profile-picture">Profile picture: </label>
             <input name="profile-picture" id="profile-picture" type="file" class="form-input">

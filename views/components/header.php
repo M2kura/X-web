@@ -1,4 +1,4 @@
-<header id="header">
+<header class="header">
     <a href="/~teterheo/home" class="logo-div">
         <img src="./media/web/logo_white.svg" alt="Logo" class="logo-img">
     </a>
@@ -11,3 +11,4 @@
         <button type="submit">Log out</button>
     </form>
 </header>
+<aside class="sidebar"></aside>

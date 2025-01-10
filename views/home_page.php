@@ -30,7 +30,6 @@ isSessionDown();
         </div>
         <div id="feed" class="feed"></div>
     </main>
-    <aside class="sidebar"></aside>
     <script src="scripts/home.js"></script>
 </body>
 </html>

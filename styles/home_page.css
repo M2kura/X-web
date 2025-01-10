@@ -8,26 +8,13 @@ body, html {
 
 .content {
     flex: 1;
-    margin-left: 25vw;
-    margin-right: 25vw;
+    margin-left: 30vw;
+    margin-right: 30vw;
     overflow-y: auto;
     box-sizing: border-box;
     color: white;
     background-color: black;
-    width: 50vw;
-}
-
-.sidebar {
-    width: 25vw;
-    background-color: black;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow: auto;
-    position: fixed;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-left: 1px solid white;
+    width: 40vw;
 }
 
 .posts-type {

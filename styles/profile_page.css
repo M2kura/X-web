@@ -7,26 +7,38 @@ body, html {
 }
 
 .content {
-    flex: 1;
-    margin-left: 25vw;
-    margin-right: 25vw;
+    margin-left: 30vw;
+    margin-right: 30vw;
     overflow-y: auto;
-    padding: 20px;
     box-sizing: border-box;
     color: white;
     background-color: black;
-    width: 50vw;
+    width: 40vw;
 }
 
-.sidebar {
-    width: 25vw;
-    background-color: black;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow: auto;
-    position: fixed;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-left: 1px solid white;
+.profile-info {
+    border-bottom: 1px solid white;
+    width: 100%;
+    min-height: 300px;
+}
+
+.change-form {
+    width: 20vw;
+    margin: 0 10vw;
+    padding: 10px;
+    z-index: 1;
+    position: absolute;
+    top: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: grey;
+}
+
+.close-btn {
+    align-self: start
+}
+
+.hidden {
+    display: none;
 }
