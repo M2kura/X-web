@@ -18,19 +18,7 @@ isSessionDown();
         <h1>Profile Page</h1>
         <h2>Hello, <?php echo($_SESSION['login']) ?></h2>
         <?php
-        $extensions = ['png', 'jpg', 'jpeg'];
-        $path = "";
-        foreach ($extensions as $ext) {
-            $tempPath = "media/users/".$_SESSION['login']."/profile_picture.".$ext;
-            if (file_exists($tempPath)) {
-                $path = $tempPath;
-                break;
-            }
-        }
-        if ($path)
-            echo '<img src="'.$path.'" alt="Avatar" class="write-pic">';
-        else
-            echo '<img src="media/web/default_avatar.png" alt="Avatar" class="write-pic">';
+            echo '<img src="'.$_SESSION['pp'].'" alt="Avatar" class="write-pic">';
         ?>
     </main>
     <aside class="sidebar"></aside>

@@ -36,7 +36,8 @@ body, html {
     height: 60px;
 }
 
-.write-post-div {
+.write-post-div,
+.post-div {
     border-bottom: 1px solid white;
     width: 100%;
     padding: 20px;
@@ -45,19 +46,22 @@ body, html {
     box-sizing: border-box;
 }
 
-.write-pic-div {
+.write-pic-div,
+.user-div {
     width: 60px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.write-pic {
+.write-pic,
+.post-pic {
     width: 60px;
     height: 60px;
 }
 
-.write-submit {
+.write-submit,
+.username {
     margin-top: 10px;
     font-size: 18px;
     align-self: center;
@@ -70,7 +74,8 @@ body, html {
     padding-left: 10px;
 }
 
-.write-post-text {
+.write-post-text,
+.post-text {
     width:100%;
     font-size: 20px;
     overflow: hidden;
@@ -82,7 +87,8 @@ body, html {
     padding: 0;
 }
 
-.write-post-text:focus {
+.write-post-text:focus,
+.post-text:focus {
     outline: none;
 }
 

@@ -5,7 +5,7 @@ function uploadPicture($file, $path) {
     $targetDir = $path.$fileExtension;
 
     if (move_uploaded_file($file["tmp_name"], $targetDir)) {
-        return ["success" => true, "filePath" => $targetDir];
+        return ["success" => true, "filePath" => substr($targetDir,3)];
     }
     return ["success" => false, "message" => "There's an error with uploading your file."];
 }
@@ -23,7 +23,7 @@ function checkPicture($file) {
 
     if ($fileExtension != "jpg" && $fileExtension != "png" && $fileExtension != "jpeg") {
         return ["success" => false, "message" => "Allowed formats are: png, jpg"];
-    } 
-    
+    }
+
     return ["success" => true];
 }

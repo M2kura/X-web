@@ -19,19 +19,7 @@ isSessionDown();
         <div class="write-post-div">
             <div class="write-pic-div">
                 <?php
-                $extensions = ['png', 'jpg', 'jpeg'];
-                $path = "";
-                foreach ($extensions as $ext) {
-                    $tempPath = "media/users/".$_SESSION['login']."/profile_picture.".$ext;
-                    if (file_exists($tempPath)) {
-                        $path = $tempPath;
-                        break;
-                    }
-                }
-                if ($path)
-                    echo '<img src="'.$path.'" alt="Avatar" class="write-pic">';
-                else
-                    echo '<img src="media/web/default_avatar.png" alt="Avatar" class="write-pic">';
+                    echo '<img src="'.$_SESSION['pp'].'" alt="Avatar" class="write-pic">';
                 ?>
                 <button class="write-submit" id="send-post">Post</button>
             </div>
@@ -40,6 +28,7 @@ isSessionDown();
                 <textarea id="write-textarea" class="write-post-text"></textarea>
             </div>
         </div>
+        <div id="feed" class="feed"></div>
     </main>
     <aside class="sidebar"></aside>
     <script src="scripts/home.js"></script>

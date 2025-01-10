@@ -6,13 +6,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = $_POST['login'];
     $password = $_POST['password'];
 
-    $query = $conn->prepare("SELECT role, password FROM users WHERE username = ?");
+    $query = $conn->prepare("SELECT role, pp_path, password FROM users WHERE username = ?");
     $query->bind_param("s", $login);
     $query->execute();
     $query->store_result();
 
     if ($query->num_rows > 0) {
-        $query->bind_result($role, $hashedPassword);
+        $query->bind_result($role, $pp_path, $hashedPassword);
         $query->fetch();
 
         if (password_verify($password, $hashedPassword)) {
@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION['login'] = $login;
             $_SESSION['role'] = $role;
+            $_SESSION['pp'] = $pp_path;
 
             $query->close();
             $conn->close();

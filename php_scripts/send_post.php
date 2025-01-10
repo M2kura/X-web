@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postContent = trim($_POST['postText']);
 
     if (empty($postContent)) {
-        echo 'Post content cannot be empty.';
+        echo 'empty';
         exit;
     }
 
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ss", $_SESSION['login'], $postContent);
 
     if ($stmt->execute()) {
-        echo 'Post submitted successfully.';
+        echo 'success';
     } else {
         echo 'Error: ' . $stmt->error;
     }
