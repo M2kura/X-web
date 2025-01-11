@@ -1,6 +1,8 @@
 const textarea = document.getElementById('write-textarea');
 const sendPostButton = document.getElementById('send-post');
 const feed = document.getElementById('feed');
+const world = document.getElementById('world');
+const following = document.getElementById('following');
 
 function resizeTextarea() {
     textarea.style.height = 'auto';
@@ -21,9 +23,9 @@ function formatDate(dateString) {
     }
 }
 
-function fetchPosts() {
+function fetchPosts(postCase) {
     feed.innerHTML = '';
-    fetch('./php_scripts/load_posts.php?case=all')
+    fetch('./php_scripts/load_posts.php?case='+postCase)
     .then(response => response.json())
     .then(posts => {
         console.log(posts);
@@ -49,7 +51,7 @@ function fetchPosts() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchPosts();
+    fetchPosts("all");
 });
 
 textarea.addEventListener('input', (e) => {
@@ -73,4 +75,12 @@ sendPostButton.addEventListener('click', () => {
     .catch(error => {
         console.error('Error:', error);
     });
+});
+
+world.addEventListener('click', () => {
+    fetchPosts("all");
+});
+
+following.addEventListener('click', () => {
+    fetchPosts("following");
 });

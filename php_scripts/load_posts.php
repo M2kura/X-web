@@ -5,6 +5,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $case = $_GET['case'];
+    $username = $_GET['username'];
 
     if ($case === "users") {
         $stmt = $conn->prepare("
@@ -12,6 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             FROM posts
             JOIN users ON posts.username = users.username
             WHERE posts.username = ?
+            ORDER BY posts.id DESC
+        ");
+        $stmt->bind_param("s", $username);
+    } else if ($case === "following") {
+        $stmt = $conn->prepare("
+            SELECT posts.username, posts.content, posts.created_at, users.pp_path
+            FROM posts
+            JOIN users ON posts.username = users.username
+            JOIN follows ON posts.username = follows.following
+            WHERE follows.follower = ?
             ORDER BY posts.id DESC
         ");
         $stmt->bind_param("s", $_SESSION['login']);

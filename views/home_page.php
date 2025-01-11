@@ -10,12 +10,16 @@ isSessionDown();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/home_page.css">
+    <link rel="stylesheet" href="styles/print.css" media="print">
     <title>Twixter: Home Page</title>
 </head>
 <body>
     <?php require "components/header.php" ?>
     <main class="content">
-        <div class="posts-type"></div>
+        <div class="posts-type">
+            <h1 class="post-type-btn" id="world">World</h1>
+            <h1 class="post-type-btn" id="following">Following</h1>
+        </div>
         <div class="write-post-div">
             <div class="write-pic-div">
                 <?php

@@ -1,5 +1,5 @@
 .logo-div {
-    width: 100%;
+    width: 70%;
 }
 
 .logo-img {
@@ -8,10 +8,30 @@
 
 .header-link {
     font-size: 40px;
+    max-width: 70%;
+    text-align: right;
 }
 
 .header-link button {
     font-size: 40px;
+}
+
+.posts-type {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-type-btn {
+    width: 50%;
+    text-align: center;
+    margin: 0;
+    height: 100%;
+    padding-top: 5px;
+    box-sizing: border-box;
+}
+
+#world {
+    border-right: 1px solid white;
 }
 
 .header {
