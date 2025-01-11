@@ -52,6 +52,9 @@ body, html {
     margin-top: 10px;
     font-size: 18px;
     align-self: center;
+    max-width: 72px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .cloud {

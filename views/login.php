@@ -1,8 +1,6 @@
 <?php
-
 require "php_scripts/check_session.php";
 isSessionUp();
-
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +14,7 @@ isSessionUp();
 <body>
     <div id="form-login">
         <h1>Log In Here</h1>
-        <form id="login-form" action="./php_scripts/login_script.php" method="POST">
+        <form id="login-form">
             <label for="login-login">Login: </label>
             <input name="login" id="login-login" type="text" class="form-input">
             <label for="login-password">Password: </label>
@@ -27,7 +25,7 @@ isSessionUp();
     </div>
     <div id="form-signup" class="hidden">
         <h1>Sign Up Here</h1>
-        <form id="signup-form" action="./php_scripts/signup_script.php" method="POST" enctype="multipart/form-data">
+        <form id="signup-form">
             <label for="signup-login">*Login: </label>
             <input name="login" id="signup-login" type="text" class="form-input">
             <label for="signup-password">*Password: </label>
