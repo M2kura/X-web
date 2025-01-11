@@ -3,7 +3,7 @@
         <img src="./media/web/logo_white.svg" alt="Logo" class="logo-img">
     </a>
     <a href="/~teterheo/" class="header-link">Home Page</a>
-    <a href="/~teterheo/profile" class="header-link">Profile</a>
+    <a href="/~teterheo/profile?username=<?php echo $_SESSION['login']?>" class="header-link">Profile</a>
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
             <a href="admin_dashboard.php">Admin Dashboard</a>
     <?php endif; ?>

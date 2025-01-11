@@ -48,7 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $response["message"] = "Invalid picture";
             die(json_encode($response));
         }
-    }
+    } else if ($_SESSION['pp'] === "media/web/default_avatar.png")
+        $filePath = $_SESSION['pp'];
 
     $stmn1 = $conn->prepare("UPDATE users SET pp_path = ?, username = ? WHERE username = ?");
     $stmn1->bind_param("sss", $filePath, $login, $_SESSION['login']);

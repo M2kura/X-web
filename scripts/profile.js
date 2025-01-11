@@ -59,3 +59,26 @@ changeForm.addEventListener('submit', (e) => {
         console.error("Error:", err);
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const usernameParam = params.get("username");
+
+    fetch(`php_scripts/load_user.php?username=${usernameParam}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            avatar.src = data.avatar;
+            username.innerHTML = data.username;
+            if (!data.isMe) {
+                changeBtn.remove();
+                changeForm.remove();
+            }
+        } else {
+            window.location.href = './404';
+        }
+    })
+    .catch(err => {
+        console.error("Error:", err);
+    });
+});

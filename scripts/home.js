@@ -34,7 +34,7 @@ function fetchPosts() {
             <div class="user-div">
                 <span class="post-date">From ${formatDate(post.created_at)}</span>
                 <img src="${post.pp_path}" alt="Avatar" class="post-pic">
-                <a class="username" href="#">${post.username}</a>
+                <a class="username" href="./profile?username=${post.username}">${post.username}</a>
             </div>
             <div class="cloud">
                 <div class="spike in-post"></div>

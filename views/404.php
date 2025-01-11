@@ -6,6 +6,7 @@
     <title>404 Error</title>
 </head>
 <body>
-    <p>Error</p>
+    <p>404 Not Found</p>
+    <a href="./home">Home</a>
 </body>
 </html>
