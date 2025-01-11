@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query->bind_param("s", $login);
         $query->execute();
         $query->store_result();
-        if ($query->num_rows > 0) {
+        if ($query->num_rows > 0 && strcasecmp($login, $_SESSION['login']) !== 0) {
             $response['message'] = "Username is already taken";
             $query->close();
             die(json_encode($response));
