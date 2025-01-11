@@ -1,5 +1,28 @@
 @media print {
-    body a{
-        color: white;
+    .header,
+    .sidebar {
+        display: none;
+    }
+
+    .content {
+        border: 3px solid #000;
+        background-color: grey;
+        margin: 0px 5vw;
+        width: 90vw
+    }
+
+    .posts-type,
+    .write-post-div,
+    .profile-info,
+    .post-div {
+        border-bottom: 3px solid #000;
+    }
+
+    #world {
+        border-right: 3px solid #000;
+    }
+
+    .username {
+        color: #fff;
     }
 }
