@@ -14,9 +14,21 @@ const content = document.getElementById('content');
 let postCount = 0;
 let joinDate = "";
 
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+const debouncedFetchHomePosts = debounce(() => {
+    fetchProfilePosts("users", username.value, postCount);
+}, 200);
+
 content.addEventListener('scroll', () => {
     if ((content.scrollTop + content.clientHeight) >= (content.scrollHeight - 500)) {
-        fetchProfilePosts("users", username.value, postCount);
+        debouncedFetchHomePosts();
     }
 });
 
@@ -170,7 +182,7 @@ function fetchProfilePosts(postCase, username, count) {
         feed.innerHTML = '';
         postCount = 0;
     }
-    if (postCount === -1) return;
+    if (postCount < 0) return;
     fetch(`./php_scripts/load_posts.php?case=${postCase}&username=${username}&count=${count}`)
     .then(response => response.json())
     .then(data => {
@@ -194,12 +206,11 @@ function fetchProfilePosts(postCase, username, count) {
                 deleteBtn.innerHTML = '&#10006;';
                 deleteBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const postDiv = btn.parentElement;
-                    fetch(`php_scripts/delete_post.php?id=${postDiv.id}`)
+                    fetch(`php_scripts/delete_post.php?id=${div.id}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            postDiv.remove();
+                            div.remove();
                             postCount--;
                         } else console.log(data.message);
                     })
