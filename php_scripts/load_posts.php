@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             ORDER BY posts.id DESC
         ");
         $stmt->bind_param("s", $_SESSION['login']);
-    } else {
+    } else if ($case === "all") {
         $stmt = $conn->prepare("
             SELECT posts.username, posts.content, posts.created_at, users.pp_path
             FROM posts

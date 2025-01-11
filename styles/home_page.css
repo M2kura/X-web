@@ -90,3 +90,13 @@ body, html {
     background: white;
     clip-path: polygon(100% 0, 0 35%, 100% 100%);
 }
+
+.spike.in-post {
+    top: 60px;
+}
+
+.post-date {
+    margin-top: -15px;
+    margin-bottom: 10px;
+    text-align: center;
+}
