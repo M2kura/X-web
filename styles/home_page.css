@@ -33,6 +33,10 @@ body, html {
     box-sizing: border-box;
 }
 
+.post-div.end {
+    height: 100px;
+}
+
 .write-pic-div,
 .user-div {
     width: 60px;

@@ -3,6 +3,9 @@ const sendPostButton = document.getElementById('send-post');
 const feed = document.getElementById('feed');
 const world = document.getElementById('world');
 const following = document.getElementById('following');
+const content = document.getElementById('content');
+let postCount = 0;
+let currentCase = "all"
 
 function resizeTextarea() {
     textarea.style.height = 'auto';
@@ -23,9 +26,13 @@ function formatDate(dateString) {
     }
 }
 
-function fetchPosts(postCase) {
-    feed.innerHTML = '';
-    fetch('./php_scripts/load_posts.php?case='+postCase)
+function fetchHomePosts(postCase, count) {
+    if (count === 0) {
+        feed.innerHTML = '';
+        postCount = 0;
+    }
+    if (postCount === -1) return;
+    fetch(`./php_scripts/load_posts.php?case=${postCase}&count=${count}`)
     .then(response => response.json())
     .then(data => {
         data.posts.forEach(post => {
@@ -42,29 +49,37 @@ function fetchPosts(postCase) {
                 <div class="spike in-post"></div>
                 <textarea readonly id="post-textarea" class="post-text">${post.content}</textarea>
             </div>`;
-            if (data.role === "admin" || data.login === post.username)
-                div.innerHTML += '<button id="delete-btn" class="delete-btn">&#10006;</button>'
-            feed.appendChild(div);
-        });
-        const deleteBtns = document.querySelectorAll('.delete-btn');
-        deleteBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const postDiv = btn.parentElement;
-                fetch(`php_scripts/delete_post.php?id=${postDiv.id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        postDiv.remove();
-                    } else {
-                        console.log(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+            if (data.role === "admin" || data.login === post.username) {
+                deleteBtn = document.createElement('button');
+                deleteBtn.classList.add('delete-btn');
+                deleteBtn.innerHTML = '&#10006;';
+                deleteBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const postDiv = btn.parentElement;
+                    fetch(`php_scripts/delete_post.php?id=${postDiv.id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            postDiv.remove();
+                            postCount--;
+                        } else console.log(data.message);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
                 });
-            });
+                div.appendChild(deleteBtn);
+            }
+            feed.appendChild(div);
+            postCount++;
         });
+        if (data.posts.length < 10) {
+            const div = document.createElement('div');
+            div.classList.add('post-div', 'end');
+            div.innerHTML = `<p>That was the last post</p>`;
+            feed.appendChild(div);
+            postCount = -1;
+        }
     })
     .catch(error => {
         console.error('Error:', error);
@@ -72,7 +87,7 @@ function fetchPosts(postCase) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchPosts("all");
+    fetchHomePosts("all", 0);
 });
 
 textarea.addEventListener('input', (e) => {
@@ -91,7 +106,7 @@ sendPostButton.addEventListener('click', () => {
     .then(response => response.text())
     .then(data => {
         if (data === "success") {
-            fetchPosts("all");
+            fetchHomePosts("all", 0);
             textarea.value = "";
         } else if (data === "empty") alert("Post cannot be empty");
     })
@@ -101,9 +116,17 @@ sendPostButton.addEventListener('click', () => {
 });
 
 world.addEventListener('click', () => {
-    fetchPosts("all");
+    currentCase = "all";
+    fetchHomePosts("all", 0);
 });
 
 following.addEventListener('click', () => {
-    fetchPosts("following");
+    currentCase = "following";
+    fetchHomePosts("following", 0);
+});
+
+content.addEventListener('scroll', () => {
+    if ((content.scrollTop + content.clientHeight) >= (content.scrollHeight - 500)) {
+        fetchHomePosts(currentCase, postCount);
+    }
 });

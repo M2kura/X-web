@@ -16,7 +16,7 @@ isSessionDown();
 </head>
 <body>
     <?php require "components/header.php" ?>
-    <main class="content">
+    <main class="content" id="content">
         <div class="profile-info">
             <div class="user-info">
                 <img src="#" alt="Avatar" class="avatar" id="avatar">

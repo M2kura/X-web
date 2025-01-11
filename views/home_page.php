@@ -15,7 +15,7 @@ isSessionDown();
 </head>
 <body>
     <?php require "components/header.php" ?>
-    <main class="content">
+    <main class="content" id="content">
         <div class="posts-type">
             <h1 class="post-type-btn" id="world">World</h1>
             <h1 class="post-type-btn" id="following">Following</h1>
