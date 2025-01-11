@@ -27,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
         $stmt->close();
     } else {
-        $response['username'] = $postUsername;
         $response['success'] = false;
         $response['message'] = 'Unauthorized action';
     }

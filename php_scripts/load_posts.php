@@ -7,7 +7,7 @@ $response = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $case = $_GET['case'];
-    $username = $_GET['username'];
+    $username = isset($_GET['username']) ? $_GET['username'] : null;
 
     if ($case === "users") {
         $stmt = $conn->prepare("
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $stmt->bind_param("s", $username);
     } else if ($case === "following") {
         $stmt = $conn->prepare("
-            SELECT post.id, posts.username, posts.content, posts.created_at, users.pp_path
+            SELECT posts.id, posts.username, posts.content, posts.created_at, users.pp_path
             FROM posts
             JOIN users ON posts.username = users.username
             JOIN follows ON posts.username = follows.following

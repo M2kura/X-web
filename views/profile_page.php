@@ -1,8 +1,6 @@
 <?php
 require "php_scripts/check_session.php";
 isSessionDown();
-
-session_start();
 ?>
 
 <!DOCTYPE html>

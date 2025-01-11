@@ -168,8 +168,7 @@ function fetchPosts(postCase, username) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const postDiv = btn.parentElement;
-                fetch(`php_scripts/delete_post.php?id=${postDiv.id}`, {
-                })
+                fetch(`php_scripts/delete_post.php?id=${postDiv.id}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
