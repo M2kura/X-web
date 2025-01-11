@@ -20,9 +20,16 @@ session_start();
     <?php require "components/header.php" ?>
     <main class="content">
         <div class="profile-info">
-            <img src="#" alt="Avatar" class="avatar" id="avatar">
-            <p class="username" id="username"></p>
-            <button id="change-btn" class="change-btn">Change profile</button>
+            <div class="user-info">
+                <img src="#" alt="Avatar" class="avatar" id="avatar">
+                <p class="username" id="username"></p>
+            </div>
+            <div class="user-btns" id="user-btns">
+                <button id="change-btn" class="change-btn">Change profile</button>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                <button id="admin-btn" class="admin-btn">Admin tools</button>
+                <?php endif; ?>
+            </div>
         </div>
         <form class="change-form hidden" id="change-form">
             <button id="close-btn" class="close-btn">&#10006;</button>

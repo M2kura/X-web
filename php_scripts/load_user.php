@@ -16,8 +16,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $query->fetch();
         if ($username === $_SESSION['login'])
             $response["isMe"] = true;
-        else
+        else {
             $response["isMe"] = false;
+            $followQuery = $conn->prepare("SELECT 1 FROM follows WHERE follower = ? AND following = ?");
+            $followQuery->bind_param("ss", $_SESSION['login'], $username);
+            $followQuery->execute();
+            $followQuery->store_result();
+            if ($followQuery->num_rows > 0)
+                $response["following"] = true;
+            else
+                $response["following"] = false;
+            $followQuery->close();
+        }
         $response["success"] = true;
         $response["username"] = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
         $response["avatar"] = $pp_path;

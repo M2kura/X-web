@@ -69,8 +69,10 @@ sendPostButton.addEventListener('click', () => {
     })
     .then(response => response.text())
     .then(data => {
-        if (data === "success") fetchPosts();
-        else if (data === "empty") alert("Post cannot be empty");
+        if (data === "success") {
+            fetchPosts("all");
+            textarea.value = "";
+        } else if (data === "empty") alert("Post cannot be empty");
     })
     .catch(error => {
         console.error('Error:', error);

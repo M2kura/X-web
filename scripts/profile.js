@@ -8,6 +8,8 @@ const message = document.getElementById('message');
 const username = document.getElementById('username');
 const avatar = document.getElementById('avatar');
 const feed = document.getElementById('feed');
+const adminBtn = document.getElementById('admin-btn');
+const userBtns = document.getElementById('user-btns');
 
 changeBtn.addEventListener('click', () => {
     changeForm.classList.toggle('hidden');
@@ -81,6 +83,37 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!data.isMe) {
                 changeBtn.remove();
                 changeForm.remove();
+                const flwBtn = document.createElement('button');
+                const unflwBtn = document.createElement('button');
+                flwBtn.classList.add('follow-btn');
+                unflwBtn.classList.add('unfollow-btn');
+                flwBtn.innerHTML = 'Follow';
+                unflwBtn.innerHTML = 'Unfollow';
+                flwBtn.addEventListener('click', () => {
+                    fetch(`php_scripts/to_follow.php?method=follow&username=${data.username}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            flwBtn.remove();
+                            userBtns.appendChild(unflwBtn);
+                        } else console.log(data.message);
+                    })
+                });
+                unflwBtn.addEventListener('click', () => {
+                    fetch(`php_scripts/to_follow.php?method=unfollow&username=${data.username}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            unflwBtn.remove();
+                            userBtns.appendChild(flwBtn);
+                        } else console.log(data.message);
+                    })
+                });
+                if (data.following) {
+                    userBtns.appendChild(unflwBtn);
+                } else {
+                    userBtns.appendChild(flwBtn);
+                }
             }
         } else {
             window.location.href = './404';
@@ -132,3 +165,7 @@ function fetchPosts(postCase, username) {
         console.error('Error:', error);
     });
 }
+
+adminBtn.addEventListener('click', () => {
+    feed.innerHTML = '';
+});

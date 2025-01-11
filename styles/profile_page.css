@@ -20,6 +20,17 @@ body, html {
     border-bottom: 1px solid white;
     width: 100%;
     min-height: 300px;
+    display:flex;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+}
+
+.user-btns {
+    display:flex;
+    flex-direction: column;
 }
 
 .change-form {
