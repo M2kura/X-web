@@ -8,7 +8,7 @@ session_start();
 $response = array("success" => false);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $login = htmlspecialchars($_POST['login']);
+    $login = $_POST['login'];
     $password = $_POST['password'];
     $passwordAgain = $_POST['password-again'];
     $profilePicture = $_FILES['profile-picture'];
@@ -16,6 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($login) || empty($password) || empty($passwordAgain)) {
         $response['message'] = "empty";
+        die(json_encode($response));
+    } else if (!preg_match('/^[a-zA-Z0-9_-]+$/', $login)) {
+        $response['message'] = "bad-login";
         die(json_encode($response));
     } else if ($password !== $passwordAgain) {
         $response['message'] = "no-match";
@@ -30,6 +33,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $response['message'] = "lenght-pass";
         die(json_encode($response));
     }
+
+    $query = $conn->prepare("SELECT username FROM users WHERE username = ?");
+    $query->bind_param("s", $login);
+    $query->execute();
+    $query->store_result();
+    if ($query->num_rows > 0) {
+        $response['message'] = "taken";
+        $query->close();
+        die(json_encode($response));
+    }
+    $query->close();
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 

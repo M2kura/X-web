@@ -26,6 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         $posts = $result->fetch_all(MYSQLI_ASSOC);
+        foreach ($posts as &$post) {
+            $post['username'] = htmlspecialchars($post['username'], ENT_QUOTES, 'UTF-8');
+            $post['content'] = htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8');
+        }
         echo json_encode($posts);
     } else {
         echo json_encode(['error' => 'Error: ' . $stmt->error]);

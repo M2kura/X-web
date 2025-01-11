@@ -34,6 +34,10 @@ function generateWar(type, form, formType) {
         war.textContent = "File cannot be larger then 5MB";
     } else if (type === "fail") {
         war.textContent = "Failed to creat user";
+    } else if (type === "bad-login") {
+        war.textContent = "Username can only contain alphanumeric characters, '_' or '-'";
+    } else if (type === "taken") {
+        war.textContent = "This username is already taken";
     } else if (type === "problem") {
         war.textContent = "Invalid data. Try again";
     }

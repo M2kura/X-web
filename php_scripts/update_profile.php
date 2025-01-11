@@ -8,22 +8,29 @@ session_start();
 $response = array("success" => false);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $login = htmlspecialchars($_POST['login']);
+    $login = $_POST['login'];
     $profilePicture = $_FILES['profile-picture'];
 
     if (empty($login) && (!isset($profilePicture) || $profilePicture['error'] == UPLOAD_ERR_NO_FILE)) {
         $response["message"] = "No changes were made";
-        echo json_encode($response);
-        exit;
+        die(json_encode($response));
     }
-
     if (empty($login))
         $login = $_SESSION['login'];
     else {
+        $query = $conn->prepare("SELECT username FROM users WHERE username = ?");
+        $query->bind_param("s", $login);
+        $query->execute();
+        $query->store_result();
+        if ($query->num_rows > 0) {
+            $response['message'] = "Username is already taken";
+            $query->close();
+            die(json_encode($response));
+        }
+        $query->close();
         if (!rename("../media/users/".$_SESSION['login'], "../media/users/".$login)) {
             $response["message"] = "Cannot chage the name";
-            echo json_encode($response);
-            exit;
+            die(json_encode($response));
         }
     }
     $filePath = "media/users/".$login."/profile_picture".strrchr($_SESSION['pp'], '.');
@@ -35,13 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $filePath = $uploadPicture['filePath'];
             else {
                 $response["message"] = "Failed to upload picture";
-                echo json_encode($response);
-                exit;
+                die(json_encode($response));
             }
         } else {
             $response["message"] = "Invalid picture";
-            echo json_encode($response);
-            exit;
+            die(json_encode($response));
         }
     }
 
@@ -51,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmn2->bind_param("ss", $login, $_SESSION['login']);
     if ($stmn1->execute() && $stmn2->execute()) {
         $response["success"] = true;
-        $response['username'] = $login;
+        $response['username'] = htmlspecialchars($login, ENT_QUOTES, 'UTF-8');
         $response['avatar'] = $filePath;
         $_SESSION['login'] = $login;
         $_SESSION['pp'] = $filePath;

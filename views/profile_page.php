@@ -17,7 +17,9 @@ isSessionDown();
     <main class="content">
         <div class="profile-info">
             <img src="<?php echo $_SESSION['pp']?>" alt="Avatar" class="avatar" id="avatar">
-            <p class="username" id="username"><?php echo $_SESSION['login']?></p>
+                <p class="username" id="username">
+                    <?php echo htmlspecialchars($_SESSION['login'], ENT_QUOTES, 'UTF-8');?>
+                </p>
             <button id="change-btn" class="change-btn">Change profile</button>
         </div>
         <form class="change-form hidden" id="change-form">

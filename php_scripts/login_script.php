@@ -5,7 +5,7 @@ require "db_connection.php";
 $response = array("success" => false);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $login = htmlspecialchars($_POST['login']);
+    $login = $_POST['login'];
     $password = $_POST['password'];
 
     if (empty($login) || empty($password) || strlen($login) > 24 || strlen($password) < 8 ||
