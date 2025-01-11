@@ -8,8 +8,8 @@ const message = document.getElementById('message');
 const username = document.getElementById('username');
 const avatar = document.getElementById('avatar');
 const feed = document.getElementById('feed');
-const adminBtn = document.getElementById('admin-btn');
 const userBtns = document.getElementById('user-btns');
+const role = document.getElementById('role');
 
 changeBtn.addEventListener('click', () => {
     changeForm.classList.toggle('hidden');
@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.success) {
             avatar.src = data.avatar;
             username.innerHTML = data.username;
+            role.innerHTML = data.role;
             fetchPosts("users", data.username);
             if (!data.isMe) {
                 changeBtn.remove();
@@ -111,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 if (data.following) {
                     userBtns.appendChild(unflwBtn);
-                } else {
+                } else if (data.following === false) {
                     userBtns.appendChild(flwBtn);
                 }
             }
@@ -143,11 +144,11 @@ function fetchPosts(postCase, username) {
     const queryString = `case=${postCase}&username=${username}`;
     fetch(`./php_scripts/load_posts.php?${queryString}`)
     .then(response => response.json())
-    .then(posts => {
-        console.log(posts);
-        posts.forEach(post => {
+    .then(data => {
+        data.posts.forEach(post => {
             const div = document.createElement('div');
             div.classList.add('post-div');
+            div.id = post.id;
             div.innerHTML = `
             <div class="user-div">
                 <span class="post-date">From ${formatDate(post.created_at)}</span>
@@ -158,14 +159,32 @@ function fetchPosts(postCase, username) {
                 <div class="spike in-post"></div>
                 <textarea readonly id="post-textarea" class="post-text">${post.content}</textarea>
             </div>`;
+            if (data.role === "admin" || data.login === post.username)
+                div.innerHTML += '<button class="delete-btn">&#10006;</button>'
             feed.appendChild(div);
+        });
+        const deleteBtns = document.querySelectorAll('.delete-btn');
+        deleteBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const postDiv = btn.parentElement;
+                fetch(`php_scripts/delete_post.php?id=${postDiv.id}`, {
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        postDiv.remove();
+                    } else {
+                        console.log(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
         });
     })
     .catch(error => {
         console.error('Error:', error);
     });
 }
-
-adminBtn.addEventListener('click', () => {
-    feed.innerHTML = '';
-});

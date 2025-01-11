@@ -23,12 +23,10 @@ session_start();
             <div class="user-info">
                 <img src="#" alt="Avatar" class="avatar" id="avatar">
                 <p class="username" id="username"></p>
+                <p id="role" class="role"></button>
             </div>
             <div class="user-btns" id="user-btns">
                 <button id="change-btn" class="change-btn">Change profile</button>
-                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                <button id="admin-btn" class="admin-btn">Admin tools</button>
-                <?php endif; ?>
             </div>
         </div>
         <form class="change-form hidden" id="change-form">

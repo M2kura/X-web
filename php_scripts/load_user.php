@@ -6,17 +6,19 @@ require 'db_connection.php';
 $response = array("success" => false);
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $query = $conn->prepare("SELECT username, pp_path FROM users WHERE username = ?");
+    $query = $conn->prepare("SELECT username, role, pp_path FROM users WHERE username = ?");
     $query->bind_param("s", $_GET['username']);
     $query->execute();
     $query->store_result();
 
     if ($query->num_rows > 0) {
-        $query->bind_result($username, $pp_path);
+        $query->bind_result($username, $role, $pp_path);
         $query->fetch();
-        if ($username === $_SESSION['login'])
+        if ($username === $_SESSION['login']) {
             $response["isMe"] = true;
-        else {
+            if ($_SESSION['role'] === "admin")
+                $response["admin"] = true;
+        } else {
             $response["isMe"] = false;
             $followQuery = $conn->prepare("SELECT 1 FROM follows WHERE follower = ? AND following = ?");
             $followQuery->bind_param("ss", $_SESSION['login'], $username);
@@ -31,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $response["success"] = true;
         $response["username"] = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
         $response["avatar"] = $pp_path;
+        $response["role"] = $role;
     } else
         $response["message"] = "User not found";
 

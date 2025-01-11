@@ -3,13 +3,15 @@ require 'db_connection.php';
 
 session_start();
 
+$response = array();
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $case = $_GET['case'];
     $username = $_GET['username'];
 
     if ($case === "users") {
         $stmt = $conn->prepare("
-            SELECT posts.content, posts.created_at, users.pp_path
+            SELECT posts.id, posts.username, posts.content, posts.created_at, users.pp_path
             FROM posts
             JOIN users ON posts.username = users.username
             WHERE posts.username = ?
@@ -18,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $stmt->bind_param("s", $username);
     } else if ($case === "following") {
         $stmt = $conn->prepare("
-            SELECT posts.username, posts.content, posts.created_at, users.pp_path
+            SELECT post.id, posts.username, posts.content, posts.created_at, users.pp_path
             FROM posts
             JOIN users ON posts.username = users.username
             JOIN follows ON posts.username = follows.following
@@ -28,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $stmt->bind_param("s", $_SESSION['login']);
     } else if ($case === "all") {
         $stmt = $conn->prepare("
-            SELECT posts.username, posts.content, posts.created_at, users.pp_path
+            SELECT posts.id, posts.username, posts.content, posts.created_at, users.pp_path
             FROM posts
             JOIN users ON posts.username = users.username
             ORDER BY posts.id DESC
@@ -41,7 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $post['username'] = htmlspecialchars($post['username'], ENT_QUOTES, 'UTF-8');
             $post['content'] = htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8');
         }
-        echo json_encode($posts);
+        $response['posts'] = $posts;
+        $response['role'] = $_SESSION['role'];
+        $response['login'] = $_SESSION['login'];
+        echo json_encode($response);
     } else {
         echo json_encode(['error' => 'Error: ' . $stmt->error]);
     }

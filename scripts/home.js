@@ -27,11 +27,11 @@ function fetchPosts(postCase) {
     feed.innerHTML = '';
     fetch('./php_scripts/load_posts.php?case='+postCase)
     .then(response => response.json())
-    .then(posts => {
-        console.log(posts);
-        posts.forEach(post => {
+    .then(data => {
+        data.posts.forEach(post => {
             const div = document.createElement('div');
             div.classList.add('post-div');
+            div.id = post.id;
             div.innerHTML = `
             <div class="user-div">
                 <span class="post-date">From ${formatDate(post.created_at)}</span>
@@ -42,7 +42,29 @@ function fetchPosts(postCase) {
                 <div class="spike in-post"></div>
                 <textarea readonly id="post-textarea" class="post-text">${post.content}</textarea>
             </div>`;
+            if (data.role === "admin" || data.login === post.username)
+                div.innerHTML += '<button id="delete-btn" class="delete-btn">&#10006;</button>'
             feed.appendChild(div);
+        });
+        const deleteBtns = document.querySelectorAll('.delete-btn');
+        deleteBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const postDiv = btn.parentElement;
+                fetch(`php_scripts/delete_post.php?id=${postDiv.id}`, {
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        postDiv.remove();
+                    } else {
+                        console.log(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
         });
     })
     .catch(error => {
