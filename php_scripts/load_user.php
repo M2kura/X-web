@@ -14,12 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ($query->num_rows > 0) {
         $query->bind_result($username, $role, $pp_path);
         $query->fetch();
-        if ($username === $_SESSION['login']) {
+        if ($username === $_SESSION['login'])
             $response["isMe"] = true;
-            if ($_SESSION['role'] === "admin")
-                $response["admin"] = true;
-        } else {
+        else {
             $response["isMe"] = false;
+            $response["myRole"] = $_SESSION['role'];
             $followQuery = $conn->prepare("SELECT 1 FROM follows WHERE follower = ? AND following = ?");
             $followQuery->bind_param("ss", $_SESSION['login'], $username);
             $followQuery->execute();
@@ -33,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $response["success"] = true;
         $response["username"] = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
         $response["avatar"] = $pp_path;
-        $response["role"] = $role;
+        $response["userRole"] = $role;
     } else
         $response["message"] = "User not found";
 

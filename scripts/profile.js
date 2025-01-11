@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.success) {
             avatar.src = data.avatar;
             username.innerHTML = data.username;
-            role.innerHTML = data.role;
+            role.innerHTML = data.userRole;
             fetchPosts("users", data.username);
             if (!data.isMe) {
                 changeBtn.remove();
@@ -110,10 +110,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         } else console.log(data.message);
                     })
                 });
-                if (data.following) {
+                if (data.following)
                     userBtns.appendChild(unflwBtn);
-                } else if (data.following === false) {
+                else if (data.following === false)
                     userBtns.appendChild(flwBtn);
+                if (data.myRole === "admin" && data.userRole === "user") {
+                    const btn = document.createElement('button');
+                    btn.classList.add('promote-btn');
+                    btn.innerHTML = 'Promote';
+                    btn.addEventListener('click', () => {
+                        fetch(`php_scripts/promote.php?username=${data.username}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                role.innerHTML = "admin";
+                                btn.remove();
+                            } else console.log(data.message);
+                        })
+                        .catch(err => {
+                            console.error("Error:", err);
+                        });
+                    });
+                    userBtns.appendChild(btn);
                 }
             }
         } else {
