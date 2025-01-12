@@ -3,8 +3,14 @@ require 'db_connection.php';
 
 session_start();
 
+/**
+ * Script for fetching posts
+ *
+ * Depending on the $case value, can return post einther speciffic 
+ * user posts, posts of the users in the following list or all existing posts.
+ * Returns no more then 10 posts at a time
+ */
 $response = array();
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $case = $_GET['case'];
     $username = isset($_GET['username']) ? $_GET['username'] : null;

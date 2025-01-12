@@ -3,8 +3,13 @@ require 'db_connection.php';
 
 session_start();
 
+/**
+ * Script for deleting a post
+ *
+ * Whether used by admin or a regular user, authorize the caller and deletes
+ * related post from the database
+ */
 $response = array();
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $id = $_GET['id'];
 

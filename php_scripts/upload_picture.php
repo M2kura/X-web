@@ -1,4 +1,10 @@
 <?php
+/**
+ * Delete all the files with the name profile_picture in the
+ * given directory
+ *
+ * @param $path Folder to look for the files in
+ */
 function deleteExisting($path) {
     $files = glob($path . 'profile_picture.*');
     foreach ($files as $file) {
@@ -8,6 +14,13 @@ function deleteExisting($path) {
     }
 }
 
+/**
+ * Uploades file into given directory
+ *
+ * @param $file File to be uploaded
+ * @param string $path The path of desired directory for a file to be placed in
+ * @return array Returns success code and a message
+ */
 function uploadPicture($file, $path) {
     deleteExisting($path);
     $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
@@ -19,6 +32,14 @@ function uploadPicture($file, $path) {
     return ["success" => false, "message" => "There's an error with uploading your file."];
 }
 
+/**
+ * Compresess and resizes the image according to
+ * target size
+ *
+ * @param $file File to be resized
+ * @param int $targetSize Desired amount on pixels for height and width
+ * @return bool Returns true if resizing was successfull
+ */
 function resizeImage($file, $targetSize) {
     $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     list($width, $height) = getimagesize($file["tmp_name"]);
@@ -48,6 +69,12 @@ function resizeImage($file, $targetSize) {
     return true;
 }
 
+/**
+ * Validates the size and extension of the file
+ *
+ * @param $file File to be checked
+ * @return array Returns success code and a message
+ */
 function checkPicture($file) {
     $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 

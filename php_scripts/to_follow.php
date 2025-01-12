@@ -3,8 +3,15 @@ session_start();
 
 require 'db_connection.php';
 
+/**
+ * Script responsable for following/unfollowing a user
+ *
+ * If a value of $method is "follow", insert a data about two users into a
+ * follows table, that store information about followers and followed one
+ *
+ * If a value of $method is "unfollow", delete such data from the database
+ */
 $response = array("success" => false);
-
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $method = $_GET['method'];
     $username = $_GET['username'];

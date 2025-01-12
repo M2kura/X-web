@@ -3,8 +3,12 @@ session_start();
 
 require 'db_connection.php';
 
+/**
+ * Script used by admins for promoting users
+ *
+ * Sets user role to admin
+ */
 $response = array("success" => false);
-
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $username = $_GET['username'];
     if ($_SESSION['role'] === 'admin') {

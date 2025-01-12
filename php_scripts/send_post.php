@@ -3,6 +3,12 @@ require 'db_connection.php';
 
 session_start();
 
+/**
+ * Script responsable for sending a post
+ *
+ * Validates the input and if it isn't empty inserts it
+ * with the authors username into a posts table
+ */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postContent = trim($_POST['postText']);
 

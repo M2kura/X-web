@@ -5,8 +5,16 @@ require "upload_picture.php";
 
 session_start();
 
+/**
+ * Script responsable for signup of a new user.
+ *
+ * Validates all the inputs from the user
+ * and restricts the signup if validation fails.
+ *
+ * If validation passed, creates a user's folder on the server,
+ * inserts data into database and sets a session variables
+ */
 $response = array("success" => false);
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = $_POST['login'];
     $password = $_POST['password'];

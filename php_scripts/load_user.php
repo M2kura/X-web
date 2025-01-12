@@ -3,8 +3,15 @@ session_start();
 
 require 'db_connection.php';
 
+/**
+ * Script used for fetching data about user to 
+ * show on profile page
+ *
+ * Depending if the logged in user is an admin and if
+ * the profile page is his, script returns different set
+ * of data to be dinamicly displayd on the gui
+ */
 $response = array("success" => false);
-
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $query = $conn->prepare("SELECT username, role, pp_path, created_at FROM users WHERE username = ?");
     $query->bind_param("s", $_GET['username']);

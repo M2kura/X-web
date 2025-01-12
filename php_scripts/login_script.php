@@ -2,8 +2,14 @@
 
 require "db_connection.php";
 
+/**
+ * Script responsable for logging in a user.
+ *
+ * Validates all the inputs from the user,
+ * authenticates him, and sets a session variobles
+ * if authenticted
+ */
 $response = array("success" => false);
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = $_POST['login'];
     $password = $_POST['password'];
