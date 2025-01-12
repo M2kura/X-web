@@ -73,7 +73,7 @@ changeForm.addEventListener('submit', (e) => {
             message.innerHTML = 'Profile updated successfully!';
             avatar.src = data.avatar + '?' + new Date().getTime();
             usernameEl.innerHTML = data.username;
-            fetchPosts("users", data.username);
+            fetchProfilePosts("users", data.username, 0);
             let url = new URL(window.location.href);
             let params = new URLSearchParams(url.search);
             params.set('username', data.username);
@@ -193,7 +193,7 @@ function fetchProfilePosts(postCase, username, count) {
             div.innerHTML = `
             <div class="user-div">
                 <span class="post-date">From ${formatDate(post.created_at, false)}</span>
-                <img src="${post.pp_path}" alt="Avatar" class="post-pic">
+                <img src="${post.pp_path+'?'+new Date().getTime()}" alt="Avatar" class="post-pic">
                 <a class="username" href="./profile?username=${post.username}">${post.username}</a>
             </div>
             <div class="cloud">
